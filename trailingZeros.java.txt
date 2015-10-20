@@ -1,0 +1,17 @@
+class Solution {
+    /*
+     * param n: As desciption
+     * return: An integer, denote the number of trailing zeros in n!
+     */
+    public long trailingZeros(long n) {
+        // write your code here
+        // int cnt = 0;
+        long res = 0;
+        for(int i = 1; Math.pow(5,i) <= n; i++){
+            res +=  n/(long)Math.pow(5,i);
+        }
+        return res;
+        
+    }
+};
+
