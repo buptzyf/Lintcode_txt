@@ -1,0 +1,28 @@
+public class Solution {
+    /**
+     * @param nums: a list of integers
+     * @return: find a  majority number
+     */
+    public int majorityNumber(ArrayList<Integer> nums) {
+        // write your code
+        //等下用Iterator遍历
+        int n = nums.size();
+        int[] key = new int[n];
+        for(int i = 0;i < n;i++){
+            key[i] = nums.get(i);
+        }
+        int cnt = 0;
+        int res = key[0];
+        for(int i = 0;i < n; i++ ){
+            if(key[i] == res)
+                cnt++;
+            else{
+                cnt--;
+                if(cnt == 0)
+                    res = key[i+1];
+            } 
+        }
+        return res;
+    }
+}
+
