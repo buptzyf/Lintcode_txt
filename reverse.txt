@@ -1,0 +1,37 @@
+/**
+ * Definition of ListNode
+ * 
+ * class ListNode {
+ * public:
+ *     int val;
+ *     ListNode *next;
+ * 
+ *     ListNode(int val) {
+ *         this->val = val;
+ *         this->next = NULL;
+ *     }
+ * }
+ */
+class Solution {
+public:
+    /**
+     * @param head: The first node of linked list.
+     * @return: The new head of reversed linked list.
+     */
+    ListNode *reverse(ListNode *head) {
+        // write your code here
+        ListNode *current,*tmp;
+        //下面括号里的两个顺序不能颠倒，不然会产生语法错误
+        if(head == NULL || head->next == NULL)   return head; 
+        current = head->next;
+        head->next = NULL;
+        while(current != NULL){
+            tmp = current->next;
+            current->next = head;
+            head = current;
+            current = tmp;
+        }
+       return head;
+    }
+};
+
