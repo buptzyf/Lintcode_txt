@@ -1,0 +1,38 @@
+/**
+ * Definition of ListNode
+ * class ListNode {
+ * public:
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int val) {
+ *         this->val = val;
+ *         this->next = NULL;
+ *     }
+ * }
+ */
+class Solution {
+public:
+    /**
+     * @param head: The first node of linked list.
+     * @return: head node
+     */
+    ListNode *deleteDuplicates(ListNode *head) {
+        // write your code here
+        ListNode *tmp = new ListNode(-1); //此处不能设置为0；
+        tmp->next = head;
+        // ListNode *tmp = (ListNode)malloc(sizeof(ListNode));
+        ListNode* sec = head;
+        ListNode* fir = tmp;
+        while(sec){
+            if(fir->val == sec->val){
+                fir->next = sec->next;
+                sec = sec->next;
+            }
+            else{
+                 fir = sec;
+                 sec = sec->next;
+            }
+        }
+        return tmp->next;
+    }
+};
