@@ -1,0 +1,43 @@
+#include<cstdio>
+using namespace std;
+ 
+struct ListNode{
+    int val;
+    ListNode *next;
+    ListNode(int x): val(x), next(NULL){
+         
+    }
+};
+ListNode* removeElements(ListNode *head,  int val){
+    //p指向list中第一个合法的元素
+    ListNode *p = head;
+    while(p && p->val == val){
+        p = p->next;
+    } 
+    if(p == NULL){
+        return NULL;
+    } 
+    ListNode *q = p->next;
+    head = p;   //新的head指针 
+    //用q去遍历整个list 
+    while(q != NULL){
+        if(q->val == val){
+            //q指向的元素要被删除
+            p->next = q->next; 
+            q = q->next; //q继续向前移动 
+        }
+        else {  //找到了一个合法元素 
+            p = p->next;
+            q = q->next;
+        }
+    } 
+    return head;
+}
+int main(){
+    ListNode *p = new ListNode(1);
+    ListNode *q = new ListNode(2);
+    p->next = q;
+    ListNode *head = removeElements(p, 1);
+    printf("%d", head&&head->val);
+    return 1;
+}
