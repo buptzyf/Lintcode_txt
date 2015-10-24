@@ -1,0 +1,27 @@
+class Solution {
+    /**
+     * @param S: A set of numbers.
+     * @return: A list of lists. All valid subsets.
+     */
+    public ArrayList<ArrayList<Integer>> subsets(int[] nums) {
+        // write your code here
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        // for(int temp:nums){
+        //     list.add(temp);
+        // }
+        //Òì³£´¦Àí
+        if(nums == null || nums.length == 0)  return res;
+        Arrays.sort(nums);
+        per(res,list,nums,0);
+        return res;
+    }
+    void per(ArrayList<ArrayList<Integer>> res, ArrayList<Integer> list ,int[] nums,int tmp){
+        res.add(new ArrayList<Integer>(list));
+        for(int i = tmp; i < nums.length; i++){
+             list.add(nums[i]);
+             per(res, list, nums, i+1 );
+             list.remove(list.size()-1);
+        }
+    }
+}
