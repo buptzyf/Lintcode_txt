@@ -1,0 +1,51 @@
+class Solution {
+    /**
+     * @param S: A set of numbers.
+     * @return: A list of lists. All valid subsets.
+     */
+    public ArrayList<ArrayList<Integer>> subsetsWithDup(ArrayList<Integer> S) {
+        // write your code here
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        //先排序；
+        Integer[] sort = new Integer[S.size()];
+        for(int i = 0; i < S.size(); i++){
+            sort[i] = S.get(i);
+        }
+        Arrays.sort(sort);
+        // System.out.println(Arrays.toString(sort));
+        ArrayList<Integer> S1 = new ArrayList<Integer>();
+        for(Integer tmp:sort){
+            S1.add(tmp);
+        }
+        // System.out.println(S.size());
+        //初始化visited数组
+        // boolean[] visited = new boolean[S.size()];
+        // for(boolean tmp:visited){
+        //     tmp = false;
+        // }
+        //异常处理
+        if(S1 == null || S.size() == 0)  return res;
+        dfs(res,list,S1,0);
+        return res;
+    }
+    void dfs(ArrayList<ArrayList<Integer>>res, ArrayList<Integer> list, ArrayList<Integer> nums,int ptr){
+        
+        res.add(new ArrayList<Integer>(list));
+        
+        for(int i = ptr; i < nums.size(); i++){
+            //剪枝
+            if( i !=ptr && nums.get(i) == nums.get(i-1)){
+               continue; 
+            }
+            //递归回溯
+            // vis[i] = true;
+            list.add(nums.get(i));
+            dfs(res,list,nums,i+1);
+            // vis[i] = false;
+            //回溯
+            list.remove(list.size()-1);
+        }
+    }
+}
+
