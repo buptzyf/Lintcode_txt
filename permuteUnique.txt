@@ -1,0 +1,49 @@
+class Solution {
+    /**
+     * @param nums: A list of integers.
+     * @return: A list of unique permutations.
+     */
+    public ArrayList<ArrayList<Integer>> permuteUnique(ArrayList<Integer> nums) {
+        // write your code here
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        //异常检测
+        if(nums == null || nums.size() == 0)  return res;
+        // Arrays.sort(nums);
+        //先排个序
+        Integer[] sort = new Integer[nums.size()];
+        for(int i = 0;i < nums.size(); i++){
+            sort[i] = nums.get(i);
+        }
+        Arrays.sort(sort);
+        ArrayList<Integer> nums1 = new ArrayList<Integer>(); 
+        for(Integer tmp:sort){
+            nums1.add(tmp);
+        }
+        //然后递归
+        boolean visited[] = new boolean[nums.size()];
+        for(boolean tmp:visited){
+            tmp = false;
+        }
+        dfs(res, list, nums1, visited);
+        return res;
+    }
+    void dfs(ArrayList<ArrayList<Integer>>res, ArrayList<Integer>list,
+                                               ArrayList<Integer>nums, boolean vis[]){
+        if(list.size() == nums.size()){
+             res.add(new ArrayList<Integer>(list));
+             return;
+        }
+        for(int i = 0; i < nums.size(); i++){
+            if(vis[i] ||( (i!=0) && (nums.get(i) == nums.get(i-1)) && !vis[i-1])){
+                continue;   
+            }
+            vis[i] = true;
+            list.add(nums.get(i));
+            dfs(res,list,nums,vis);
+            vis[i] = false;
+            list.remove(list.size()-1);
+        }
+    }
+}
+
