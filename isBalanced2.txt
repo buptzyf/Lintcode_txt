@@ -1,0 +1,33 @@
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ */
+public class Solution {
+    /**
+     * @param root: The root of binary tree.
+     * @return: True if this Binary tree is Balanced, or false.
+     */
+    public boolean isBalanced(TreeNode root) {
+        // write your code here
+        int dep = 0;
+        return check(root, dep);
+    }
+    boolean check(TreeNode root, int dep){
+        if(root == null) 
+            dep = 0;
+            return true;
+        int leftdepth; int rightdepth;
+        boolean booleft = check(root.left, leftdepth);
+        boolean booright = check(root.right, rightdepth);
+        dep = Math.max(leftdepth,rightdepth) + 1;
+        return booleft && booright && (Math.abs(leftdepth - rightdepth) <=1);
+        
+    }
+}
