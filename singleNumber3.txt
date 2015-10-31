@@ -1,0 +1,25 @@
+public class Solution {
+    /**
+     * @param A : An integer array
+     * @return : Two integers
+     */
+    public List<Integer> singleNumberIII(int[] A) {
+        // write your code here
+        List<Integer> list = new ArrayList<Integer>();
+        if(null == A || A.length == 0)  return list;
+        int cmb = 0;
+        int single1 = 0;
+        int single2 = 0;
+        for(int tmp:A){
+            cmb ^= tmp;
+        }
+        int lastbit = cmb - (cmb & (cmb-1)); //Çólastbit£»
+        for(int i:A){
+            if((i & lastbit) == 0)  single1 ^= i;
+            else single2 ^= i;
+        }
+        list.add(single1);
+        list.add(single2);
+        return list;
+    }
+}
