@@ -1,0 +1,39 @@
+public class Solution {
+    /**
+     * @param num: Given the candidate numbers
+     * @param target: Given the target number
+     * @return: All the combinations that sum to target
+     */
+    public List<List<Integer>> combinationSum2(int[] num, int target) {
+        // write your code here
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        Arrays.sort(num);
+        if(null == num)  return res;
+        // int sum = 0;
+        // boolean visited[] = new boolean[num.length];
+        // for(boolean temp : visited)
+        //     temp = false;
+        bomb(res,list,num,target,0,0);
+        return res;
+    }
+    private void bomb(List<List<Integer>> res, ArrayList<Integer>list, int[] num,
+                    int target, int sum, int pos){
+        if(sum == target){
+            res.add(new ArrayList<Integer>(list));
+            return;
+        }
+        if(sum > target)   return ;
+        for(int i = pos; i < num.length; ++i){
+            // vis[i] = true;
+            if( i!=pos && num[i-1] == num[i])  continue;
+            sum += num[i];
+            list.add(num[i]);
+            bomb(res, list, num, target, sum, i+1);
+            // vis[i] = false;
+            // if(num[num.length-1] == num[i-1]) ++i;
+            sum -= num[i];
+            list.remove(list.size()-1);
+        }
+    }
+}
