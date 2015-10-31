@@ -1,0 +1,22 @@
+class Solution {
+public:
+	/**
+	 * @param A : An integer array
+	 * @return : An integer 
+	 */
+    int singleNumberII(vector<int> &A) {
+        // write your code here
+        if(A.size() == 0)  return 0;
+        if(A.size() == 1)  return A[0];
+        int result = 0;
+        int bit_i_sum;
+        for(int i = 0; i < sizeof(int)*8; ++i){
+            bit_i_sum = 0;
+            for(int j =0; j < A.size(); ++j){
+                bit_i_sum += A[j]>>i & 1;
+            }
+            result |= bit_i_sum % 3 << i;
+        }
+        return result;
+    }
+};
