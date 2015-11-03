@@ -1,0 +1,28 @@
+class Solution {
+    /**
+     * @param prices: Given an integer array
+     * @return: Maximum profit
+     */
+    public int maxProfit(int[] prices) {
+        // write your code here
+        if(prices.length == 0)  return 0;
+        
+        int[] firpro = new int [prices.length];
+        firpro[0] = 0;     //注意此时的curpro是valley
+        for(int i = 1, curpro = prices[0]; i < prices.length; ++i){
+            firpro[i] = Math.max(prices[i] - curpro, firpro[i-1]);
+            curpro = Math.min(prices[i],curpro);
+        }
+        int[] secpro = new int [prices.length];
+        secpro[prices.length-1] = 0;  //注意此时的curpro是peak
+        for(int i = prices.length -2, curpro = prices[prices.length - 1]; i >= 0 ; --i){
+            secpro[i] = Math.max(curpro - prices[i], secpro[i+1]);
+            curpro = Math.max(prices[i],curpro);
+        }
+        int maxpro = Integer.MIN_VALUE;
+        for(int i = 0; i < prices.length; ++i){
+            maxpro = Math.max(maxpro,firpro[i] + secpro[i]);
+        }
+        return maxpro;
+    }
+};
