@@ -1,0 +1,34 @@
+class Solution {
+public:
+    /**
+     * @param values: a vector of integers
+     * @return: a boolean which equals to true if the first player will win
+     */
+    bool firstWillWin(vector<int> &values) {
+        // write your code here
+        int size = values.size();
+        if(size <= 2)  return true;
+        int sum_a = 0;
+        int sum_b = 0;
+        bool turn = true;
+        for(int i = 0; i < size; i++){
+            if(turn){
+                sum_a += values[i];
+                if(i+1 < size && values[i+1] >= values[i]){
+                    sum_a += values[i+1];
+                    i++;
+                }
+            }
+            else{
+                sum_b += values[i];
+                if(i+1 < size && values[i+1] >= values[i]){
+                    sum_b += values[i+1];
+                    i++;
+                }
+            }
+            turn = !turn;
+        }
+        if(sum_a > sum_b)  return true;
+        else return false;
+    }
+};
