@@ -1,0 +1,29 @@
+class Solution {
+public:
+    /**
+     * @param nums: a vector of integers
+     * @return: nothing
+     */
+    void partitionArray(vector<int> &nums) {
+        // write your code here
+        int n = nums.size();
+        int left = 0;
+        int right = n-1;
+        while(left < right){
+            while(left<right && (nums[left]&1) == 1){  
+                left++;
+                continue;
+            }
+            while(left<right && (nums[right]&1) == 0){  
+                right--;
+                continue;
+            }
+            swap(nums[left++],nums[right--]);
+        }
+    }
+    //  void swap(int &left,int &right){
+    //         int temp = right;
+    //         left = right;
+    //         right = temp;
+    // }
+};
