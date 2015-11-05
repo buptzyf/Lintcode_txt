@@ -1,0 +1,23 @@
+class Solution {
+public:
+    /**
+     * @param A: A list of integers
+     * @return: The boolean answer
+     */
+    bool canJump(vector<int> A) {
+        // write you code here
+        if(A.size() <= 1)  return true;
+        vector<bool> index(A.size(),false);
+        index[0] = true;
+        for(int i = 1; i < A.size(); i++){
+            for(int j = i-1; j >=0; j-- ){
+                if(index[j] && A[j] + j >= i){
+                    index[i] = true;
+                    break;
+                }
+            }
+        }
+        return index[A.size() - 1];
+    }
+};
+
