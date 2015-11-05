@@ -1,0 +1,18 @@
+public class Solution {
+    /**
+     * @param A: A list of integers
+     * @return: The boolean answer
+     */
+    public boolean canJump(int[] A) {
+        // wirte your code here
+        if(A == null || A.length <= 1)  return true;
+        int step = A[0];
+        for(int i = 1; i < A.length; ++i ){
+            if(i < step && i + A[i] > step)
+                step = i+ A[i];
+        }
+        if(step >= A.length -1)  return true;
+        else return false;
+  
+    }
+}
