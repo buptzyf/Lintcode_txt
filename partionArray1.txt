@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int partitionArray(vector<int> &nums, int k) {
+        // write your code here
+        sort(nums.begin(),nums.end());
+        int sum = 0;
+        for(int i = 0; i < nums.size(); i++){
+            if(nums[i] < k) sum++;
+        }
+        if(sum == nums.size())  return nums.size();
+        return sum;
+    }
+};
