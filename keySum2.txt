@@ -1,0 +1,36 @@
+public class Solution {
+    /**
+     * @param A: an integer array.
+     * @param k: a positive integer (k <= length(A))
+     * @param target: a integer
+     * @return a list of lists of integer 
+     */ 
+    public ArrayList<ArrayList<Integer>> kSumII(int A[], int k, int target) {
+        // write your code here
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        if(A == null || A.length == 0)  return res;
+        int sum = 0; int pos = 0;
+        Arrays.sort(A);
+        // System.out.println(Arrays.toString(A));
+        helper(res,list,A,sum,target,k,pos);        
+        return res;
+    }
+     void helper(ArrayList<ArrayList<Integer>> res,ArrayList<Integer>list,int nums[],
+                        int sum,int target,int k, int pos){
+        if(sum == target && list.size() == k){
+            res.add(new ArrayList<Integer>(list));// ±ğÍüÁË
+            return;
+        }
+        if(pos > nums.length || sum > target) return;
+        for(int i = pos; i < nums.length;i++){
+            sum += nums[i];
+            list.add(nums[i]);
+            helper(res,list,nums,sum,target,k,i+1);
+            sum -= nums[i];
+            list.remove(list.size()-1);
+        }
+        
+    }
+}
+
