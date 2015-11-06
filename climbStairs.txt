@@ -1,0 +1,33 @@
+class Solution {
+public:
+    /**
+     * @param n: An integer
+     * @return: An integer
+     */
+    int climbStairs(int n) {
+        // write your code here
+        if(n <= 1)  return 1;
+        int nums[] = {0,1,2};
+        // for(int i = 0; i < n; i++){
+        //     nums[i] = i+1;
+        // }
+        int sum = 0;
+        int k = 0;
+        bomb(nums,n,sum,k,1);
+        return k;
+    }
+    //数组已经相当于地址了，所以不需要&nums[]取址符
+    void bomb(int nums[],int n,int sum, int &k,int pos){
+        if(sum == n){
+            k++;
+            return;
+        }
+        if(sum > n) return;
+        for(int i = 1; i <= 2; i++){
+            sum += nums[i];
+            bomb(nums, n, sum, k,i);
+            sum -= nums[i];
+        }
+    }
+};
+
