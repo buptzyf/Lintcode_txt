@@ -1,0 +1,40 @@
+class Solution{
+public:
+    /**
+     * @param colors: A list of integer
+     * @param k: An integer
+     * @return: nothing
+     */    
+    void sortColors2(vector<int> &colors, int k) {
+        // write your code here
+        int start = 0;
+        int end = colors.size()-1;
+        int count = 0;
+        while(count <= k){
+            int Min = INT_MAX;
+            int Max = INT_MIN;
+            for(int i = start; i < end; i++){
+                Min = min(Min,colors[i]);
+                Max = max(Max,colors[i]);
+            }
+            int left = start;
+            int right = end;
+            int cur = left;
+            while(cur <= right){
+                if(colors[cur] == Min){
+                    swap(colors[cur],colors[left]);
+                    left ++;
+                    cur++;
+                }else if(colors[cur] == Max){
+                    swap(colors[cur],colors[right]);
+                    right--;
+                }else{
+                     cur++;
+                }
+            }
+            start = left;
+            end = right;
+            count += 2;
+        }
+    }
+};
