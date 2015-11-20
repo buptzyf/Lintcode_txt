@@ -1,0 +1,24 @@
+class Solution {
+public:
+    /**
+     * @param heights: a vector of integers
+     * @return: an integer
+     */
+    int maxArea(vector<int> &heights) {
+        // write your code here
+        int start = 0;
+        int end = heights.size()-1;
+        int area = 0;
+        int results = 0;
+        while(start <= end){
+            area = min(heights[start],heights[end])*(end - start);
+            results = max(area,results);
+            if(heights[start] < heights[end]){
+                start++;
+            }else{
+                end--;
+            }
+        }
+        return results;
+    }
+};
