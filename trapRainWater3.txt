@@ -1,0 +1,27 @@
+class Solution {
+public:
+    /**
+     * @param heights: a vector of integers
+     * @return: a integer
+     */
+    int trapRainWater(vector<int> &heights) {
+        // write your code here
+        int n = heights.size();
+        int max = 0; // 最大值的位置
+        for(int i = 0; i < n; i++){
+            max = heights[i] > heights[max]? i : max;
+        }
+        int cube = 0;
+        for(int i = 0, peak = 0; i < max; i++){
+            peak = peak < heights[i]? heights[i] : peak;
+            if(peak > heights[i])
+                cube += peak - heights[i];
+        }
+        for(int i = n-1, top = 0; i > max; i--){
+            top = top < heights[i]? heights[i]:top;
+            if(top > heights[i])
+                cube += top - heights[i];
+        }
+        return cube;
+    }
+};
