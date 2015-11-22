@@ -1,0 +1,25 @@
+class Solution {
+public:
+    /**
+     * @param heights: a vector of integers
+     * @return: a integer
+     */
+    int trapRainWater(vector<int> &heights) {
+        // write your code here
+        int n = heights.size();
+        int cube = 0;
+        vector<int>max_left(n,0);
+        vector<int>max_right(n,0);
+        for(int i = 1; i < n; i++){
+            max_left[i] = max(max_left[i-1],heights[i-1]);
+            max_right[n-1-i] = max(max_right[n-i],heights[n-i]);
+        }
+        for(int i = 0; i < n; i++){
+            int height = min(max_left[i],max_right[i]);
+            if(height > heights[i]){
+                cube += height - heights[i];
+            }
+        }
+        return cube;
+    }
+};
