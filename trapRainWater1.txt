@@ -1,0 +1,26 @@
+public class Solution {
+    /**
+     * @param heights: an array of integers
+     * @return: a integer
+     */
+    public int trapRainWater(int[] heights) {
+        // write your code here
+        int n = heights.length;
+        int[] max_left = new int[n];
+        int[] max_right = new int[n];
+        Arrays.fill(max_left,0);
+        Arrays.fill(max_right,0);
+        for(int i = 1; i < n; i++){
+            max_left[i] = Math.max(max_left[i-1],heights[i-1]);
+            max_right[n-1-i] = Math.max(max_right[n-i],heights[n-i]);
+        }
+        int cube = 0;
+        for(int i = 0; i < n; i++){
+            int height = Math.min(max_left[i],max_right[i]);
+            if(height > heights[i]){
+                cube += height - heights[i];
+            }
+        }
+        return cube;
+    }
+}
