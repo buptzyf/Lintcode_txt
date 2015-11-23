@@ -1,0 +1,38 @@
+/**
+ * Definition for Directed graph.
+ * struct DirectedGraphNode {
+ *     int label;
+ *     vector<DirectedGraphNode *> neighbors;
+ *     DirectedGraphNode(int x) : label(x) {};
+ * };
+ */
+class Solution {
+public:
+    /**
+     * @param graph: A list of Directed graph node
+     * @param s: the starting Directed graph node
+     * @param t: the terminal Directed graph node
+     * @return: a boolean value
+     */
+    bool hasRoute(vector<DirectedGraphNode*> graph,
+                  DirectedGraphNode* s, DirectedGraphNode* t) {
+        // write your code here
+        // ÀàËÆ²ãÐò±éÀúµÄ¿íËÑ
+       if(s -> neighbors.size() == 0)  return false;
+       if(s == t)  return true;
+       deque<DirectedGraphNode*> bfs;
+       bfs.push_back(s);
+       while(bfs.size() > 0){
+          DirectedGraphNode* curnode = bfs[0];
+        // DirectedGraphNode* curnode = bfs.pop_back();
+           for(int i = 0; i < curnode->neighbors.size(); i++){
+               if(curnode->neighbors[i] == t)  return true;
+               else bfs.push_back(curnode->neighbors[i]);
+           }
+           bfs.pop_front();
+       }
+       return false;
+    }
+};
+
+
