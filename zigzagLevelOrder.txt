@@ -1,0 +1,45 @@
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ */
+ 
+ 
+public class Solution {
+    /**
+     * @param root: The root of binary tree.
+     * @return: A list of lists of integer include 
+     *          the zigzag level order traversal of its nodes' values 
+     */
+    public ArrayList<ArrayList<Integer>> zigzagLevelOrder(TreeNode root) {
+        // write your code here
+        ArrayList<ArrayList<Integer>>  res = new ArrayList<ArrayList<Integer>>();
+        if(root == null)  return res;
+        Queue<TreeNode> q= new LinkedList<>();
+        boolean ptr = true;
+        q.offer(root);
+        while(q.size() > 0){
+            ArrayList<Integer> level = new ArrayList<Integer>();
+            int len = q.size();
+            for(int i = 0; i < len; i++){
+                TreeNode tr = q.poll();
+                level.add(tr.val);
+                if(tr.left != null)  q.offer(tr.left);
+                if(tr.right != null)  q.offer(tr.right);
+            }
+            if(ptr)  res.add(level);
+            else{
+                Collections.reverse(level);   // 此处的翻转要注意  相当于翻转容器了
+                res.add(level);
+            } 
+            ptr = !ptr;
+        }
+        return res;
+    }
+}
