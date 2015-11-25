@@ -1,0 +1,23 @@
+class Solution {
+public:
+    /**
+     * @param A: A list of lists of integers
+     * @return: An integer
+     */
+    int jump(vector<int> A) {
+        // wirte your code here
+        //特殊
+        if(A.empty()) return 0;
+        int step = 0;
+        int index = 0;    // 在跳的范围内，下一步跳的最远的
+        int far = 0;      //当前跳的最远的
+        for(int i = 0; i < A.size(); i++){
+            if(i > far){
+                far = index;
+                step++;
+            }
+            index = max(index,i+A[i]);
+        }
+        return step;
+    }
+};
