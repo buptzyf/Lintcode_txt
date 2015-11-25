@@ -1,0 +1,23 @@
+class Solution {
+public:
+    /**
+     * @param gas: a vector of integers
+     * @param cost: a vector of integers
+     * @return: an integer 
+     */
+    int canCompleteCircuit(vector<int> &gas, vector<int> &cost) {
+        // write your code here
+        int start = 0;
+        int total = 0;
+        int sum = 0;
+        for(int i = 0; i < gas.size(); i++){
+            sum += gas[i] - cost[i];   //从i到i+i，剩余的煤气 
+            total += gas[i] - cost[i];
+            if(sum < 0){
+                start = i+1;  //表示前面那些站点都不能作为起始站，现在开始从下一个站点开始 
+                sum = 0;
+            }
+        }
+        return total >= 0 ? start : -1;   //煤气总量是否大于等于总消耗  
+    }
+};
