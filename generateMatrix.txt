@@ -1,0 +1,23 @@
+public class Solution {
+    /**
+     * @param n an integer
+     * @return a square matrix
+     */
+    public int[][] generateMatrix(int n) {
+        // Write your code here
+        int[][] res = new int[n][n];
+        if(n <= 0)  return res;
+        int begin = 0;
+        int end  = n-1;
+        int num = 1;
+        while(begin < end){
+            for(int j = begin; j < end; j++)  res[begin][j] = num++;
+            for(int i = begin; i < end; i++)  res[i][end] = num++;
+            for(int j = end; j > begin; j--)  res[end][j] = num++;
+            for(int i = end; i > begin; i--)  res[i][begin] = num++;
+            begin++; end--;
+        }
+        if(begin == end) res[begin][end] = num++;
+        return res;
+    }
+}
