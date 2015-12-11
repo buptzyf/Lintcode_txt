@@ -30,5 +30,6 @@ public class Solution {
         if(maxright > 0)  sum += maxright;
         max_sum = Math.max(sum,max_sum);
         return Math.max(maxleft,maxright) > 0 ? Math.max(maxleft,maxright) + root.val : root.val;
+        // return Math.max(root.val, Math.max(root.val + maxleft, root.val + maxright));    这个也可以 
     }
 }
