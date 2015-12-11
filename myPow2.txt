@@ -1,0 +1,21 @@
+public class Solution {
+    /**
+     * @param x the base number
+     * @param n the power number
+     * @return the result
+     */
+    public double myPow(double x, int n) {
+        // Write your code here
+        if(n < 0)  return 1.0/pow(x,-n);
+        else return pow(x,n);
+    }
+    private double pow(double x, int n){
+        double res = 0;
+        if(x == 0)  return res;
+        if(n == 0)  return 1;
+        if(n == 1)  return x;
+        double v = pow(x,n/2);
+        if(n % 2 == 0)  return v*v;
+        else return v*v*x;
+    }
+}
