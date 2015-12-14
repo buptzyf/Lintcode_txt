@@ -1,0 +1,27 @@
+class Solution {
+public:
+    /**
+     * @param num: a rotated sorted array
+     * @return: the minimum number in the array
+     */
+    int findMin(vector<int> &num) {
+        // write your code here
+        int n = num.size();
+        int left = 0;
+        int right = n-1;
+        int mid;
+        if(n == 0)   return INT_MIN;
+        if(n == 1)   return num[0];
+        if(n == 2)   return min(num[left],num[right]);
+        if(num[left] < num[right])  return num[left];   // ÓĞĞòµÄ 
+        while(left + 1 < right){
+            mid = left + (right - left)/2;
+            if(num[mid] > num[left]){
+                left = mid;
+            }else{
+                right = mid;
+            }
+        }
+        return min(num[left],num[right]);
+    }
+};

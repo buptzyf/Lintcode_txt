@@ -1,0 +1,36 @@
+public class Solution {
+    /**
+     * @param num: a rotated sorted array
+     * @return: the minimum number in the array
+     */
+    static int pos = Integer.MIN_VALUE;
+    public int findMin(int[] num) {
+        // write your code here
+        int n = num.length;
+        //异常判断
+        if(num == null || n == 0)  return pos;
+        if(n == 1)  return num[0];
+        //判断首尾
+        if(num[0] < num[n-1]) return num[0];
+        if(n == 2) return Math.min(num[0],num[1]);
+        //处理右边界问题
+        if(num[n - 1] < num[n - 2]){
+            // pos = num[n - 1];
+            return num[n-1];
+        }
+        //二分区间查找  和  归并排序有一定类似
+        helper(num,1,n-2);
+        return pos;
+    }
+    private void helper(int[] nums,int left, int right){
+        if(left < right){
+            int mid = left + (right - left)/2;
+            if(nums[mid] < nums[mid - 1] && nums[mid] < nums[mid + 1]){
+               pos = nums[mid];
+               return;
+            }
+            helper(nums,left,mid);
+            helper(nums,mid+1,right);
+        }
+    }
+}
