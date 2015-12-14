@@ -1,0 +1,53 @@
+public class Solution {
+    /**
+     * @param nums: an array of integers
+     * @return: return nothing (void), do not return anything, modify nums in-place instead
+     */
+    public void nextPermutation(int[] nums) {
+        // write your code here
+        int n = nums.length;
+        int partion = -1;
+        // int change = n-1;
+	//1.找到最后一个升序位置pos
+        for(int i = n-1; i > 0; i--){
+            if(nums[i-1] < nums[i]){
+                partion = i-1;
+                break;
+            }
+        }
+	//2.如果不存在升序，即这个数是最大的，那么反排这个数组
+        if(partion == -1){
+            reverse(nums,0,n-1);
+            return;
+        }  
+        // for(int i = n-1; i > partion; i--){
+        //     if(nums[i] > nums[partion]){
+        //         change = i; //需要交换的位置
+        //         int temp = nums[partion];
+        //         nums[partion] = nums[change];
+        //         nums[change] = temp;
+        //         break;
+        //     }
+        // }
+	//3.存在升序，那么找到pos之后最后一个比它大的位置
+        for(int i = n-1; i > partion; i--){
+            if(nums[i] > nums[partion]){
+                int temp = nums[partion];
+                nums[partion] = nums[i];
+                nums[i] = temp;
+                break;
+            }
+        }
+	//4.反排pos之后的数
+        reverse(nums,partion+1,n-1);
+    }
+    private void reverse(int[] nums, int left, int right){
+        while(left < right){
+            int temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+            left++;
+            right--;
+        }
+    }
+}
