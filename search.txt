@@ -1,0 +1,38 @@
+class Solution {
+    /** 
+     * param A : an integer ratated sorted array
+     * param target :  an integer to be searched
+     * return : an integer
+     */
+public:
+    int search(vector<int> &A, int target) {
+        // write your code here
+        int n  = A.size();
+        if(n == 0 || A.empty())  return -1;
+        if(n == 1 && A[0] == target)  return 0;
+        if(n == 1 && A[0] != target)  return -1;
+        int left = 0; int right = n - 1;
+        while(left + 1 < right){
+            int mid = left + (right - left)/2;
+            if(A[left] < A[mid]){
+                if(A[left] <= target && target < A[mid]){
+                    right = mid;
+                }
+                else{
+                    left = mid;
+                }
+            }else{
+                if(A[right] >= target && target > A[mid]){
+                    left = mid;
+                }
+                else{
+                    right = mid;
+                }
+            }    
+            if(A[mid] == target)  return mid;
+            if(A[left] == target) return left;
+            if(A[right] == target)  return right;
+        }
+        return -1;
+    }
+};
